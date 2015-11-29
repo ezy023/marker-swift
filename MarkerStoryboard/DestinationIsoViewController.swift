@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class DestinationIsoViewController: UIViewController {
+    @IBOutlet weak var mapView: GMSMapView!
     
-    @IBOutlet weak var imageView: UIImageView!
-    internal var image: UIImage?
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        let camera = GMSCameraPosition.cameraWithLatitude(-33.00, longitude: 151.00, zoom: 6)
+        mapView = GMSMapView.mapWithFrame(mapView.frame, camera: camera)
+        let marker = GMSMarker()
+        marker.position = camera.target
+        marker.snippet = "Hello World"
+        marker.appearAnimation = kGMSMarkerAnimationPop
+        marker.map = mapView
         
-        imageView.image = image
 
         // Do any additional setup after loading the view.
     }

@@ -70,9 +70,7 @@ class DestinationCollectionViewController: UICollectionViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let indexPath = self.collectionView?.indexPathsForSelectedItems()?.last
         let cell = self.collectionView?.cellForItemAtIndexPath(indexPath!) as! DestinationCollectionViewCell
-        let toViewController = segue    .destinationViewController as! DestinationIsoViewController
-        toViewController.image = cell.image
-
+        let toViewController = segue.destinationViewController as! DestinationIsoViewController
     }
     // MARK: UICollectionViewDelegate
 
