@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import CoreLocation
 
 private let reuseIdentifier = "DestinationCell"
 
-class DestinationCollectionViewController: UICollectionViewController {
+class DestinationCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+    var locationManager: CLLocationManager
+    
+    required init?(coder aDecoder: NSCoder) {
+        locationManager = CLLocationManager()
+        
+        super.init(coder: aDecoder)
+        
+        locationManager.delegate = self
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +78,36 @@ class DestinationCollectionViewController: UICollectionViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let indexPath = self.collectionView?.indexPathsForSelectedItems()?.last
-        let cell = self.collectionView?.cellForItemAtIndexPath(indexPath!) as! DestinationCollectionViewCell
-        let toViewController = segue.destinationViewController as! DestinationIsoViewController
+        if segue.identifier == "showCamera" {
+            print("SHOWING CAMERA")
+            let imagePickerController = segue.destinationViewController as! UIImagePickerController
+            imagePickerController.sourceType = .Camera
+            imagePickerController.delegate = self
+        }
+    }
+    
+    // MARK: UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print("Finished Picking Image")
+        self.dismissViewControllerAnimated(true, completion: nil) // In this completion block reload collectionView data to refresh with new image
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        print("Cancelled Picking Image")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("Getting a location authorization challenge here")
+        if status == CLAuthorizationStatus.NotDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        if (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+            self.locationManager.startUpdatingLocation()
+            self.locationManager.startUpdatingHeading()
+        }
     }
     // MARK: UICollectionViewDelegate
 
@@ -81,11 +118,12 @@ class DestinationCollectionViewController: UICollectionViewController {
     }
     */
 
-
+    /*
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    */
 
 
     /*

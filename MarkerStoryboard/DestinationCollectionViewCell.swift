@@ -11,6 +11,6 @@ import UIKit
 class DestinationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
-    public var image: UIImage?
+    internal var image: UIImage?
 
 }

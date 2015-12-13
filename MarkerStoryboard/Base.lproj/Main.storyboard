@@ -5,22 +5,28 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="8oY-Qf-bnc">
             <objects>
-                <navigationController id="eaz-VU-P6v" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="eaz-VU-P6v" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="4Br-v2-uzI"/>
+                    <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xD5-wi-uCd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="sMA-dW-ZhL">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="YaG-7Z-cBg" kind="relationship" relationship="rootViewController" id="PVa-Bp-BB3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxi-vy-WEb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="581" y="426"/>
+            <point key="canvasLocation" x="640.5" y="426.5"/>
         </scene>
         <!--Collection View Title-->
         <scene sceneID="uta-V8-BZf">
@@ -29,6 +35,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" dataMode="prototypes" id="ieR-vI-E38">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="0.0" id="qBU-US-U6Y">
                             <size key="itemSize" width="125" height="125"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -60,6 +67,15 @@
                             <outlet property="delegate" destination="YaG-7Z-cBg" id="pP2-re-On3"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="FcT-HW-yO2"/>
+                        <barButtonItem systemItem="camera" id="EY5-Nz-20p">
+                            <connections>
+                                <segue destination="BLp-J8-J9t" kind="presentation" identifier="showCamera" id="jJn-IV-cAF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="lh6-cO-m2Y"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Collection View Title" id="TPb-EV-ISE"/>
                     <connections>
                         <segue destination="Uum-sZ-prF" kind="show" identifier="DestinationIsolationView" id="B2r-D5-slO"/>
@@ -69,32 +85,42 @@
             </objects>
             <point key="canvasLocation" x="1255.5" y="426.5"/>
         </scene>
+        <!--Image Picker Controller-->
+        <scene sceneID="bnJ-hJ-B9e">
+            <objects>
+                <viewController id="BLp-J8-J9t" customClass="UIImagePickerController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="feh-C0-ZqR"/>
+                        <viewControllerLayoutGuide type="bottom" id="O5u-Vs-ut4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VBi-eM-QRA" customClass="UIPickerView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iso-0C-E2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1255" y="1286"/>
+        </scene>
         <!--Destination Iso View Controller-->
         <scene sceneID="Oos-2T-Fhj">
             <objects>
                 <viewController id="Uum-sZ-prF" customClass="DestinationIsoViewController" customModule="MarkerStoryboard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="P5Y-oD-J0J"/>
-                        <viewControllerLayoutGuide type="bottom" id="rDb-eo-yL0"/>
+                        <viewControllerLayoutGuide type="top" id="7mK-1D-0Zb"/>
+                        <viewControllerLayoutGuide type="bottom" id="SxP-ZA-jH5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EJq-Eq-izw">
+                    <view key="view" contentMode="scaleToFill" id="3l2-JI-bU6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DHl-tt-NkX" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="562"/>
-                                <color key="backgroundColor" red="0.88778409089999999" green="0.0" blue="0.071223231740000004" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="mapView" destination="DHl-tt-NkX" id="N3U-UB-nmC"/>
-                    </connections>
+                    <toolbarItems/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZv-qi-Nnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830.5" y="417.5"/>
+            <point key="canvasLocation" x="1874.5" y="426.5"/>
         </scene>
     </scenes>
 </document>

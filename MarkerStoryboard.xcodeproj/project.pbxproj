@@ -31,6 +31,7 @@
 		03A6D4311C0ABDFF0067FA96 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A6D4301C0ABDFF0067FA96 /* CoreBluetooth.framework */; };
 		03A6D4331C0ABE060067FA96 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A6D4321C0ABE060067FA96 /* Accelerate.framework */; };
 		03A6D4361C0B674A0067FA96 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 03A6D4351C0B674A0067FA96 /* GoogleMaps.bundle */; };
+		03B3B34D1C14C1C1000226C6 /* DestinationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B3B34C1C14C1C1000226C6 /* DestinationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		03A6D4301C0ABDFF0067FA96 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		03A6D4321C0ABE060067FA96 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		03A6D4351C0B674A0067FA96 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		03B3B34C1C14C1C1000226C6 /* DestinationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				03A6D3FE1C0A3D840067FA96 /* Info.plist */,
 				03A6D40F1C0A500B0067FA96 /* Images.xcassets */,
 				03A6D4161C0ABBC20067FA96 /* GoogleMaps.framework */,
+				03B3B34C1C14C1C1000226C6 /* DestinationModel.swift */,
 			);
 			path = MarkerStoryboard;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				03A6D4151C0A5AC90067FA96 /* DestinationIsoViewController.swift in Sources */,
 				03A6D4051C0A424E0067FA96 /* DestinationCollectionViewCell.swift in Sources */,
 				03A6D3F31C0A3D840067FA96 /* AppDelegate.swift in Sources */,
+				03B3B34D1C14C1C1000226C6 /* DestinationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MarkerStoryboard",
@@ -339,6 +344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MarkerStoryboard",
@@ -370,6 +376,7 @@
 				03A6D4031C0A3D840067FA96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
