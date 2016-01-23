@@ -10,8 +10,10 @@ import UIKit
 import GoogleMaps
 
 class DestinationIsoViewController: UIViewController {
+    var destination: EZYDestination?
     
     override func viewDidLoad() {
+        print("This gets called when I perform segue")
         super.viewDidLoad()
 //        let camera = GMSCameraPosition.cameraWithLatitude(41.8369, longitude: -87.6847, zoom: 6)
 //        let currentMapView = GMSMapView.mapWithFrame(mapView.frame, camera: camera)
@@ -22,19 +24,22 @@ class DestinationIsoViewController: UIViewController {
 //        marker.map = currentMapView
 //        
 //        self.mapView = currentMapView
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.868,
-            longitude:151.2086, zoom:6)
-        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera:camera)
-        
-        let marker = GMSMarker()
-        marker.position = camera.target
-        marker.snippet = "Hello World"
-        marker.appearAnimation = kGMSMarkerAnimationPop
-        marker.map = mapView
-        
-        self.view = mapView
-        
-        // Do any additional setup after loading the view.
+        if let dest = destination {
+            let latitude = dest.location.coordinate.latitude
+            let longitude = dest.location.coordinate.longitude
+            
+            let camera = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom:6)
+            let mapView = GMSMapView.mapWithFrame(CGRectZero, camera:camera)
+            
+            let marker = GMSMarker()
+            marker.position = camera.target
+            marker.snippet = "Hello World"
+            marker.appearAnimation = kGMSMarkerAnimationPop
+            marker.map = mapView
+            
+            self.view = mapView
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
