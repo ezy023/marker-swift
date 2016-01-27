@@ -72,6 +72,40 @@ class DestinationModel {
 //        }
 //    }
     
+    func firstLoadOfObjects(completionHandler: () -> ()) -> Void {
+//        Alamofire.request(.GET, "http://192.168.1.24:8000/users/1/locations/?access_token=7b15237d-7b45-11e5-90e7-a45e60cc4223").responseJSON { response in
+        let url = NSURL(string: "http://192.168.1.24:8000/users/1/locations/?access_token=7b15237d-7b45-11e5-90e7-a45e60cc4223")
+        let request = NSURLRequest(URL: url!)
+        let mySession = NSURLSession.sharedSession()
+        let task = mySession.dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            let httpResponse = response as! NSHTTPURLResponse
+            print("Status Code: \(httpResponse.statusCode)")
+            print("Data: \(data)")
+            var jsonString: String? = String(data: data!, encoding: NSUTF8StringEncoding)
+            do {
+                guard let urlDict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? [String: AnyObject] else {
+                    print("JSON Deserialization failed")
+                    return
+                }
+                if let locations = urlDict["data"] as? [[String:String]] {
+                    for location in locations {
+                        print(location["image_url"])
+                    }
+                }
+                print("Debug line")
+            } catch _ {
+                print("WRONG")
+            }
+            
+//            print(jsonString!)
+            
+        }
+        task.resume()
+        
+
+    }
+    
     func destinationAtIndex(indexPath: NSIndexPath) -> EZYDestination {
         let destination : EZYDestination = destinationArray[indexPath.row]
         return destination
