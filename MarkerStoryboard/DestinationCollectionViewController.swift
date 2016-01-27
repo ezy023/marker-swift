@@ -37,7 +37,9 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        model.firstLoadOfObjects {
+            print("In the completion handler")
+        }
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -137,9 +139,10 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
             let imagePickerController = segue.destinationViewController as! UIImagePickerController
             imagePickerController.sourceType = .Camera
             imagePickerController.delegate = self
+            imagePickerController.allowsEditing = true
         }
         
-        if segue.identifier == "DestinationIsolationView" {
+         if segue.identifier == "DestinationIsolationView" {
             let destinationIsoVC = segue.destinationViewController as! DestinationIsoViewController
             destinationIsoVC.destination = selectedDestination
         }
@@ -155,36 +158,17 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
         }
         print("Latitude: \(currentLocation.coordinate.latitude). Longitude: \(currentLocation.coordinate.longitude)")
         let imagePNGData: NSData? = UIImagePNGRepresentation(image)
+        let imageJPEGData: NSData? = UIImageJPEGRepresentation(image, 1.0)
         let uuid = NSUUID().UUIDString
         let fileManager = NSFileManager.defaultManager()
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         var filePathToWrite = "\(paths)/\(uuid).png"
         fileManager.createFileAtPath(filePathToWrite, contents: imagePNGData, attributes: nil)
-//        var getImagePath = paths.stringByAppendingString("\(uuid).png")
         
-        if fileManager.fileExistsAtPath(filePathToWrite) {
-            print("YES THE FILE IS HERE>>>>>>>>>>>>")
-        }
-//        let tmpFileURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
-//        let imageFileURL = tmpFileURL.URLByAppendingPathComponent(uuid).URLByAppendingPathExtension("png")
-//        let imagePathString: String = "\(imageFileURL)"
-//        if let data = imagePNGData {
-//            data.writeToFile(imagePathString, atomically: true)
-//        }
-
-        let params = ["test1": "erik", "test2": "starwars"];
-        let paramsJSON: NSData
-
-        do {
-            paramsJSON = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(rawValue: 0))
-        } catch let error as NSError {
-            paramsJSON = NSData()
-            print(error)
-        }
+        var params: [String: AnyObject] = ["latitude": currentLocation.coordinate.latitude, "longitude": currentLocation.coordinate.longitude]
         
-        Alamofire.request(.GET, "http://192.168.1.24:8000/users/1/dummy/").responseJSON { (response) in
+        Alamofire.request(.GET, "http://192.168.1.24:8000/users/1/locations/aws_post/").responseJSON { (response) in
             print(response)
-            
             if let jsonData = response.result.value {
                 let fields = jsonData["fields"]
                 let awsURL = jsonData["url"] as! String
@@ -195,22 +179,17 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
                     .POST,
                     awsURL,
                     multipartFormData: { multipart in
-//                        multipart.appendBodyPart(fileURL: imageFileURL, name: "file")
-//                        multipart.appendBodyPart(fileURL: fileURL!, name: "file", fileName: theFields["key"]!, mimeType: "image/png")
-//                        multipart.appendBodyPart(data: imagePNGData!, name: "file", fileName: "test-ios.png", mimeType: "image/png")
                         multipart.appendBodyPart(data: (theFields["x-amz-algorithm"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-algorithm")
                         multipart.appendBodyPart(data: (theFields["key"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "key")
                         multipart.appendBodyPart(data: (theFields["x-amz-signature"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-signature")
                         multipart.appendBodyPart(data: (theFields["x-amz-date"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-date")
                         multipart.appendBodyPart(data: (theFields["policy"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "policy")
                         multipart.appendBodyPart(data: (theFields["x-amz-credential"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-credential")
-                        multipart.appendBodyPart(data: imagePNGData!, name: "file")
+                        multipart.appendBodyPart(data: imageJPEGData!, name: "file", fileName: "test-ios.png", mimeType: "image/jpeg")
                         for (formKey, formValue) in theFields {
                             let k = formKey
                             let v = formValue
                             print("Key \(k): Value \(v)")
-//                            let vData = v.dataUsingEncoding(NSUTF8StringEncoding)
-//                            multipart.appendBodyPart(data: vData!, name: k)
                         }
                     },
                     encodingCompletion: { encodingResult in
@@ -218,9 +197,21 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
                         case .Success(let upload, _, _):
                             upload.response { request, response, data, error in
                                 print("=====================")
-                                debugPrint(request)
-                                print("=====================")
                                 debugPrint(response)
+                                if let imageLocationOnAWS = response?.allHeaderFields["Location"] {
+                                    params["image_url"] = imageLocationOnAWS
+                                    Alamofire.request(.POST, "http://192.168.1.24:8000/users/1/locations/create/?access_token=7b15237d-7b45-11e5-90e7-a45e60cc4223", parameters: params, encoding: .JSON, headers: nil).response { response in
+                                        self.collectionView?.reloadData()
+                                        // At some point it would be nice to animate the new cell in?
+                                        do {
+                                            try fileManager.removeItemAtPath(filePathToWrite)
+                                        } catch {
+                                            print("Error removing file at path \(filePathToWrite)")
+                                        }
+                                    }
+                                } else {
+                                    print("No Location for image returned")
+                                }
                                 print("=====================")
                                 let thedata = NSString(data: data!, encoding: NSUTF8StringEncoding)
                                 debugPrint(thedata)
@@ -228,7 +219,7 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
                                 debugPrint(error)
                             }
                         case .Failure(let encodingError):
-                            print(encodingError)
+                            debugPrint(encodingError)
                         }
                     }
                 )
@@ -251,30 +242,10 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
 //                })
             }
         }
-
-//        Alamofire.upload(.POST, "http://192.168.1.24:8000/users/1/locations/create/", multipartFormData: { multipart in
-//                multipart.appendBodyPart(data: imageJPEGData!, name: "image")
-//                multipart.appendBodyPart(data: paramsJSON, name: "imagemeta")
-//            },
-//            encodingCompletion: { encodingResult in
-//                switch encodingResult {
-//                case .Success(let _, _, _):
-//                    print("SUCCESS")
-//                case .Failure(let encodingError):
-//                    print(encodingError)
-//                }
-//            })
         
         let newDestination: EZYDestination = EZYDestination(theImage: image, destinationLocation: currentLocation)
         model.addDestination(newDestination)
-        self.collectionView?.reloadData() // Do I need to do this?
-        // Get NSData representation of the image to upload to api
-//        let testImage = UIImage(named: "marker")
-//        let imageJPEGData = UIImageJPEGRepresentation(testImage!, 1.0)
 
-        
-//        let postDataDictionary = ["image": image, "latitude": currentLocation.coordinate.latitude, "longitude": currentLocation.coordinate.longitude]
-        
         self.dismissViewControllerAnimated(true, completion: nil) // In this completion block reload collectionView data to refresh with new image
     }
     
