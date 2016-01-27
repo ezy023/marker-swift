@@ -28,7 +28,7 @@ class DestinationIsoViewController: UIViewController {
             let latitude = dest.location.coordinate.latitude
             let longitude = dest.location.coordinate.longitude
             
-            let camera = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom:6)
+            let camera = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom:13)
             let mapView = GMSMapView.mapWithFrame(CGRectZero, camera:camera)
             
             let marker = GMSMarker()
