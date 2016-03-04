@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         GMSServices.provideAPIKey(googleMapsAPIKey)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("access_token")
+        if let accessToken = NSUserDefaults.standardUserDefaults().valueForKey("access_token") {
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
+        } else {
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController");
+        }
         // Override point for customization after application launch.
         return true
     }

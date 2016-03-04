@@ -39,6 +39,9 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
         super.viewDidLoad()
         model.firstLoadOfObjects {
             print("In the completion handler")
+            dispatch_async(dispatch_get_main_queue(), {
+                self.collectionView?.reloadData()
+            })
         }
         
 
@@ -84,8 +87,12 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
         let cell: DestinationCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DestinationCollectionViewCell
         
         let rowDestination = model.destinationAtIndex(indexPath)
-        cell.image = rowDestination.image
-        cell.imageView.image = rowDestination.image
+        let imageData = NSData(contentsOfURL: rowDestination.imageFileURL)
+        let destinationImage = UIImage(data: imageData!)
+        cell.image = destinationImage
+        cell.imageView.image = destinationImage
+//        cell.image = UIImage(imagewit
+//        cell.imageView.image = rowDestination.image
 //        if let cellImage = UIImage(named: "marker") {
 //            cell.image = cellImage
 //            cell.imageView.image = cellImage
@@ -140,6 +147,7 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
             imagePickerController.sourceType = .Camera
             imagePickerController.delegate = self
             imagePickerController.allowsEditing = true
+            imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
         }
         
          if segue.identifier == "DestinationIsolationView" {
@@ -156,13 +164,22 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
             print("There was an error retrieving the location for this image")
             return
         }
-        print("Latitude: \(currentLocation.coordinate.latitude). Longitude: \(currentLocation.coordinate.longitude)")
-        let imagePNGData: NSData? = UIImagePNGRepresentation(image)
-        let imageJPEGData: NSData? = UIImageJPEGRepresentation(image, 1.0)
+        guard let editInfo = editingInfo else {
+            print("No Editing Info")
+            return
+        }
+        
+        guard let editedImage: UIImage = editInfo[UIImagePickerControllerEditedImage] as? UIImage else {
+            print("No Edited Image")
+            return
+        }
+        
+        let imagePNGData: NSData? = UIImagePNGRepresentation(editedImage)
+        let imageJPEGData: NSData? = UIImageJPEGRepresentation(editedImage, 1.0)
         let uuid = NSUUID().UUIDString
         let fileManager = NSFileManager.defaultManager()
-        var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        var filePathToWrite = "\(paths)/\(uuid).png"
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let filePathToWrite = "\(paths)/\(uuid).png"
         fileManager.createFileAtPath(filePathToWrite, contents: imagePNGData, attributes: nil)
         
         var params: [String: AnyObject] = ["latitude": currentLocation.coordinate.latitude, "longitude": currentLocation.coordinate.longitude]
@@ -173,7 +190,6 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
                 let fields = jsonData["fields"]
                 let awsURL = jsonData["url"] as! String
                 let theFields = fields as! Dictionary<String, String>
-                let fileURL = NSURL(string: filePathToWrite)
                 
                 Alamofire.upload(
                     .POST,
@@ -186,25 +202,21 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
                         multipart.appendBodyPart(data: (theFields["policy"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "policy")
                         multipart.appendBodyPart(data: (theFields["x-amz-credential"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-credential")
                         multipart.appendBodyPart(data: imageJPEGData!, name: "file", fileName: "test-ios.png", mimeType: "image/jpeg")
-                        for (formKey, formValue) in theFields {
-                            let k = formKey
-                            let v = formValue
-                            print("Key \(k): Value \(v)")
-                        }
                     },
                     encodingCompletion: { encodingResult in
                         switch encodingResult {
                         case .Success(let upload, _, _):
                             upload.response { request, response, data, error in
-                                print("=====================")
-                                debugPrint(response)
-                                if let imageLocationOnAWS = response?.allHeaderFields["Location"] {
+                                if let imageLocationOnAWS = response?.allHeaderFields["Location"] as? String {
                                     params["image_url"] = imageLocationOnAWS
                                     Alamofire.request(.POST, "http://192.168.1.24:8000/users/1/locations/create/?access_token=7b15237d-7b45-11e5-90e7-a45e60cc4223", parameters: params, encoding: .JSON, headers: nil).response { response in
                                         self.collectionView?.reloadData()
                                         // At some point it would be nice to animate the new cell in?
                                         do {
                                             try fileManager.removeItemAtPath(filePathToWrite)
+                                            let imageAWSURL = NSURL(string: imageLocationOnAWS)
+                                            let newDestination: EZYDestination = EZYDestination(imageURL: imageAWSURL!, destinationLocation: currentLocation)
+                                            self.model.addDestination(newDestination)
                                         } catch {
                                             print("Error removing file at path \(filePathToWrite)")
                                         }
@@ -212,40 +224,16 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
                                 } else {
                                     print("No Location for image returned")
                                 }
-                                print("=====================")
-                                let thedata = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                                debugPrint(thedata)
-                                print("=====================")
-                                debugPrint(error)
+//                                let thedata = NSString(data: data!, encoding: NSUTF8StringEncoding) // Helpful to print AWS Response
                             }
                         case .Failure(let encodingError):
                             debugPrint(encodingError)
                         }
                     }
                 )
-                
-//                Alamofire.upload(.POST, awsURL["url"], multipartFormData: { multipart in
-//                        multipart.appendBodyPart(data: imageJPEGData!, name: "file")
-//                        for (formKey, formValue) in fields {
-//                            var k = formKey as! String
-//                            var v = formValue as! String
-//                            multipart.appendBodyPart(data: v.dataUsingEncoding(NSUTF8StringEncoding), name: k)
-//                        }
-//                    },
-//                    encodingCompletion: { encodingResult in
-//                        switch encodingResult {
-//                        case .Success(let _, _, _):
-//                            print("SUCCESS")
-//                        case .Failure(let encodingError):
-//                            print(encodingError)
-//                        }
-//                })
             }
         }
         
-        let newDestination: EZYDestination = EZYDestination(theImage: image, destinationLocation: currentLocation)
-        model.addDestination(newDestination)
-
         self.dismissViewControllerAnimated(true, completion: nil) // In this completion block reload collectionView data to refresh with new image
     }
     
