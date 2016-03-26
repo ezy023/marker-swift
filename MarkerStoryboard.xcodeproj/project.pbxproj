@@ -36,9 +36,7 @@
 		03B3B3681C42F323000226C6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03B3B35A1C42F2B4000226C6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03D1E7651C7A53A00017FD78 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E7641C7A539F0017FD78 /* LoginViewController.swift */; };
 		03D1E76D1C7E7F610017FD78 /* EZYHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */; };
-		03D1E77C1C8276F30017FD78 /* MarkerStoryboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E77B1C8276F30017FD78 /* MarkerStoryboardTests.swift */; };
 		03D1E78B1C8910B20017FD78 /* EZYURLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */; };
-		03D1E78D1C8913930017FD78 /* EZYMockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E78C1C8913930017FD78 /* EZYMockURLSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,10 +151,7 @@
 		03D1E7641C7A539F0017FD78 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYHTTPClient.swift; sourceTree = "<group>"; };
 		03D1E7791C8276F30017FD78 /* MarkerStoryboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkerStoryboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03D1E77B1C8276F30017FD78 /* MarkerStoryboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStoryboardTests.swift; sourceTree = "<group>"; };
-		03D1E77D1C8276F30017FD78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYURLSessionProtocol.swift; sourceTree = "<group>"; };
-		03D1E78C1C8913930017FD78 /* EZYMockURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYMockURLSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +206,6 @@
 				03A6D41A1C0ABC4D0067FA96 /* CoreData.framework */,
 				03A6D4181C0ABC440067FA96 /* AVFoundation.framework */,
 				03A6D3F11C0A3D840067FA96 /* MarkerStoryboard */,
-				03D1E77A1C8276F30017FD78 /* MarkerStoryboardTests */,
 				03A6D3F01C0A3D840067FA96 /* Products */,
 				03B3B34F1C42F2B3000226C6 /* Alamofire.xcodeproj */,
 			);
@@ -260,16 +254,6 @@
 				03B3B3661C42F2B4000226C6 /* Alamofire.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		03D1E77A1C8276F30017FD78 /* MarkerStoryboardTests */ = {
-			isa = PBXGroup;
-			children = (
-				03D1E77B1C8276F30017FD78 /* MarkerStoryboardTests.swift */,
-				03D1E77D1C8276F30017FD78 /* Info.plist */,
-				03D1E78C1C8913930017FD78 /* EZYMockURLSession.swift */,
-			);
-			path = MarkerStoryboardTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,8 +435,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03D1E77C1C8276F30017FD78 /* MarkerStoryboardTests.swift in Sources */,
-				03D1E78D1C8913930017FD78 /* EZYMockURLSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
