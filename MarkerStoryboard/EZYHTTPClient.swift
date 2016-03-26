@@ -1,5 +1,5 @@
 //
-//  EZYNetworking.swift
+//  EZYHTTPClient.swift
 //  MarkerStoryboard
 //
 //  Created by Erik Allar on 2/24/16.
@@ -8,13 +8,15 @@
 
 import Foundation
 
-class EZYNetworking {
+extension NSURLSession : EZYURLSessionProtocol {}
+
+class EZYHTTPClient {
 //    let baseURL = "http://192.168.1.24:8000/"
     let baseURL = "http://127.0.0.1:8000/"
     let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token")
-    let session: NSURLSession
+    let session: EZYURLSessionProtocol
     
-    init(session: NSURLSession = NSURLSession.sharedSession()) {
+    init(session: EZYURLSessionProtocol = NSURLSession.sharedSession()) {
         self.session = session
     }
     

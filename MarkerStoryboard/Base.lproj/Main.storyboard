@@ -8,7 +8,6 @@
         <!--Login View Controller-->
         <scene sceneID="4vZ-PB-2hR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="usW-1V-VCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="LoginViewController" id="bA1-eW-lQx" customClass="LoginViewController" customModule="MarkerStoryboard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ywc-Ot-zZi"/>
@@ -51,6 +50,7 @@
                         <outlet property="passwordTextField" destination="g7v-GK-SVu" id="fE1-zC-P29"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="usW-1V-VCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="624.5" y="-355.5"/>
         </scene>

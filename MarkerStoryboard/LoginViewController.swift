@@ -12,11 +12,11 @@ import UIKit
 class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    var networking: EZYNetworking = {
-        return EZYNetworking()
+    var networking: EZYHTTPClient = {
+        return EZYHTTPClient()
     }()
     
-    init(networking: EZYNetworking) {
+    init(networking: EZYHTTPClient) {
         super.init(nibName: nil, bundle: nil)
         self.networking = networking
     }

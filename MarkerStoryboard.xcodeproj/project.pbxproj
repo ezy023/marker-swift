@@ -35,8 +35,10 @@
 		03B3B3671C42F323000226C6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B3B35A1C42F2B4000226C6 /* Alamofire.framework */; };
 		03B3B3681C42F323000226C6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03B3B35A1C42F2B4000226C6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03D1E7651C7A53A00017FD78 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E7641C7A539F0017FD78 /* LoginViewController.swift */; };
-		03D1E76D1C7E7F610017FD78 /* EZYNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E76C1C7E7F610017FD78 /* EZYNetworking.swift */; };
+		03D1E76D1C7E7F610017FD78 /* EZYHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */; };
 		03D1E77C1C8276F30017FD78 /* MarkerStoryboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E77B1C8276F30017FD78 /* MarkerStoryboardTests.swift */; };
+		03D1E78B1C8910B20017FD78 /* EZYURLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */; };
+		03D1E78D1C8913930017FD78 /* EZYMockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E78C1C8913930017FD78 /* EZYMockURLSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,10 +151,12 @@
 		03B3B34C1C14C1C1000226C6 /* DestinationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationModel.swift; sourceTree = "<group>"; };
 		03B3B34F1C42F2B3000226C6 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		03D1E7641C7A539F0017FD78 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		03D1E76C1C7E7F610017FD78 /* EZYNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYNetworking.swift; sourceTree = "<group>"; };
+		03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYHTTPClient.swift; sourceTree = "<group>"; };
 		03D1E7791C8276F30017FD78 /* MarkerStoryboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkerStoryboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D1E77B1C8276F30017FD78 /* MarkerStoryboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStoryboardTests.swift; sourceTree = "<group>"; };
 		03D1E77D1C8276F30017FD78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYURLSessionProtocol.swift; sourceTree = "<group>"; };
+		03D1E78C1C8913930017FD78 /* EZYMockURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYMockURLSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +242,8 @@
 				03A6D40F1C0A500B0067FA96 /* Images.xcassets */,
 				03A6D4161C0ABBC20067FA96 /* GoogleMaps.framework */,
 				03B3B34C1C14C1C1000226C6 /* DestinationModel.swift */,
-				03D1E76C1C7E7F610017FD78 /* EZYNetworking.swift */,
+				03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */,
+				03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */,
 			);
 			path = MarkerStoryboard;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 			children = (
 				03D1E77B1C8276F30017FD78 /* MarkerStoryboardTests.swift */,
 				03D1E77D1C8276F30017FD78 /* Info.plist */,
+				03D1E78C1C8913930017FD78 /* EZYMockURLSession.swift */,
 			);
 			path = MarkerStoryboardTests;
 			sourceTree = "<group>";
@@ -435,7 +441,8 @@
 				03A6D4151C0A5AC90067FA96 /* DestinationIsoViewController.swift in Sources */,
 				03A6D4051C0A424E0067FA96 /* DestinationCollectionViewCell.swift in Sources */,
 				03A6D3F31C0A3D840067FA96 /* AppDelegate.swift in Sources */,
-				03D1E76D1C7E7F610017FD78 /* EZYNetworking.swift in Sources */,
+				03D1E78B1C8910B20017FD78 /* EZYURLSessionProtocol.swift in Sources */,
+				03D1E76D1C7E7F610017FD78 /* EZYHTTPClient.swift in Sources */,
 				03B3B34D1C14C1C1000226C6 /* DestinationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03D1E77C1C8276F30017FD78 /* MarkerStoryboardTests.swift in Sources */,
+				03D1E78D1C8913930017FD78 /* EZYMockURLSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +666,7 @@
 				03D1E7821C8276F30017FD78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

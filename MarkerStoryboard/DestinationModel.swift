@@ -90,7 +90,7 @@ class DestinationModel {
 //    }
     
     func firstLoadOfObjects(completionHandler:() -> Void) -> Void {
-        let nwk: EZYNetworking = EZYNetworking()
+        let nwk: EZYHTTPClient = EZYHTTPClient()
         nwk.GET("users/1/locations/?access_token=7b15237d-7b45-11e5-90e7-a45e60cc4223", params: nil, completionHandler: { (response) in
                 print("IN HERE")
                 print(response)
