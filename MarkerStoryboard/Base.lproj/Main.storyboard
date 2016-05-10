@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eaz-VU-P6v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eaz-VU-P6v">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -77,6 +77,63 @@
             </objects>
             <point key="canvasLocation" x="640.5" y="426.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="C7k-0D-Db2">
+            <objects>
+                <navigationController id="u7h-UD-8XJ" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ng3-vs-QgK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="D5A-dF-2eR" kind="relationship" relationship="rootViewController" id="mDf-Rj-Czx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="69D-jO-Nql" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1201.5" y="-355.5"/>
+        </scene>
+        <!--Tags Table View Controller-->
+        <scene sceneID="w8S-Su-k94">
+            <objects>
+                <tableViewController id="D5A-dF-2eR" customClass="EZYTagsTableViewController" customModule="MarkerStoryboard" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="puw-EE-3H0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagTableViewCell" id="UY8-1U-sIV">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UY8-1U-sIV" id="vwk-de-QUt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="D5A-dF-2eR" id="Te6-UA-jfn"/>
+                            <outlet property="delegate" destination="D5A-dF-2eR" id="2fs-dh-0ZQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="P3S-eg-i2b">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="u7d-pR-xuw">
+                            <connections>
+                                <action selector="dismissWithSelectedTags" destination="D5A-dF-2eR" id="ZCs-oq-krj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dbT-D6-awc">
+                            <connections>
+                                <action selector="createNewTag" destination="D5A-dF-2eR" id="Tfj-DK-U0R"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9L7-3C-Itw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1761.5" y="-355.5"/>
+        </scene>
         <!--Collection View Title-->
         <scene sceneID="uta-V8-BZf">
             <objects>
@@ -125,7 +182,13 @@
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="lh6-cO-m2Y"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Collection View Title" id="TPb-EV-ISE"/>
+                    <navigationItem key="navigationItem" title="Collection View Title" id="TPb-EV-ISE">
+                        <barButtonItem key="rightBarButtonItem" title="tags" id="CnW-Sp-r7A">
+                            <connections>
+                                <segue destination="u7h-UD-8XJ" kind="presentation" identifier="PresentTagSelection" id="C8R-RU-V63"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Uum-sZ-prF" kind="show" identifier="DestinationIsolationView" id="B2r-D5-slO"/>
                     </connections>

@@ -33,9 +33,13 @@ class LoginViewController: UIViewController {
             "email": email,
             "password": password
         ]
+        
+        // {"access_token": "erik-token", "id": 1, "email": "erik@example.com"}
         self.networking.POST("users/login/", params: params, completionHandler: { (responseData) in
                 let accessToken = responseData["access_token"] as! String
+                let userId = responseData["id"] as! Int
                 NSUserDefaults.standardUserDefaults().setValue(accessToken, forKey: "access_token")
+                NSUserDefaults.standardUserDefaults().setValue(userId, forKey: "user-id")
                 self.switchToMainStoryboardOnSuccess()
             }, errorHandler: { (error) in
                 NSLog(error!.localizedDescription)
@@ -51,8 +55,10 @@ class LoginViewController: UIViewController {
             "password": password
         ]
         self.networking.POST("users/login/", params: params, completionHandler: { (responseData) in
-                let accessToken = responseData["access_token"]
+                let accessToken = responseData["access_token"] as! String
+                let userId = responseData["id"] as! Int
                 NSUserDefaults.standardUserDefaults().setValue(accessToken, forKey: "access_token")
+                NSUserDefaults.standardUserDefaults().setValue(userId, forKey: "user-id")
                 self.switchToMainStoryboardOnSuccess()
             }, errorHandler: { (error) in
                 NSLog(error!.localizedDescription)

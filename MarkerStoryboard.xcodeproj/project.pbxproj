@@ -37,6 +37,7 @@
 		03D1E7651C7A53A00017FD78 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E7641C7A539F0017FD78 /* LoginViewController.swift */; };
 		03D1E76D1C7E7F610017FD78 /* EZYHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */; };
 		03D1E78B1C8910B20017FD78 /* EZYURLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */; };
+		03E1843E1CA8947400884CF4 /* EZYTagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1843D1CA8947400884CF4 /* EZYTagsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYHTTPClient.swift; sourceTree = "<group>"; };
 		03D1E7791C8276F30017FD78 /* MarkerStoryboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkerStoryboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYURLSessionProtocol.swift; sourceTree = "<group>"; };
+		03E1843D1CA8947400884CF4 /* EZYTagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYTagsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +240,7 @@
 				03B3B34C1C14C1C1000226C6 /* DestinationModel.swift */,
 				03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */,
 				03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */,
+				03E1843D1CA8947400884CF4 /* EZYTagsTableViewController.swift */,
 			);
 			path = MarkerStoryboard;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 			files = (
 				03D1E7651C7A53A00017FD78 /* LoginViewController.swift in Sources */,
 				03A6D4071C0A4AB90067FA96 /* DestinationCollectionViewController.swift in Sources */,
+				03E1843E1CA8947400884CF4 /* EZYTagsTableViewController.swift in Sources */,
 				03A6D4151C0A5AC90067FA96 /* DestinationIsoViewController.swift in Sources */,
 				03A6D4051C0A424E0067FA96 /* DestinationCollectionViewCell.swift in Sources */,
 				03A6D3F31C0A3D840067FA96 /* AppDelegate.swift in Sources */,
@@ -598,11 +602,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MarkerStoryboardTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboardTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarkerStoryboard.app/MarkerStoryboard";
 			};
 			name = Debug;
@@ -611,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MarkerStoryboardTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -10,10 +10,22 @@ import Foundation
 
 extension NSURLSession : EZYURLSessionProtocol {}
 
-class EZYHTTPClient {
+protocol EZYHTTPClientProtocol {
+    func GET(relativeUrl: String,
+        params: [String: AnyObject]?,
+        completionHandler: ((responseData: [String: AnyObject]) -> Void),
+        errorHandler: ((error: NSError?) -> Void)?)
+    
+    func POST(relativeUrl: String,
+        params: [String: AnyObject]?,
+        completionHandler: ((responseData: [String: AnyObject]) -> Void),
+        errorHandler: ((error: NSError?) -> Void)?)
+}
+
+class EZYHTTPClient: EZYHTTPClientProtocol {
 //    let baseURL = "http://192.168.1.24:8000/"
     let baseURL = "http://127.0.0.1:8000/"
-    let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token")
+//    let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token") // you shouldn't need an accessToken to create an HTTPClient
     let session: EZYURLSessionProtocol
     
     init(session: EZYURLSessionProtocol = NSURLSession.sharedSession()) {
@@ -23,16 +35,23 @@ class EZYHTTPClient {
     func GET(relativeUrl: String,
         params: [String: AnyObject]?,
         completionHandler: ((responseData: [String: AnyObject]) -> Void),
-        errorHandler: ((error: NSError?) -> Void)?) {
+    errorHandler: ((error: NSError?) -> Void)?) {
 
         let fullURLString = baseURL + relativeUrl
         guard let url = NSURL(string: fullURLString) else {
             print("Improperly formatted url %s", relativeUrl)
             return;
         }
-        let request = NSURLRequest(URL: url)
         
-        let task = self.session.dataTaskWithRequest(request) { (data, resposne, error) in
+        let request = NSMutableURLRequest(URL: url)
+        
+        // There must be a better way to handle access_tokens with an http client
+        if let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token") {
+            let accessTokenHeaderString: String = "Token \(accessToken)"
+            request.setValue(accessTokenHeaderString, forHTTPHeaderField: "Authorization")
+        }
+        
+        let task = self.session.dataTaskWithRequest(request) { (data, response, error) in
             if error != nil {
                 errorHandler!(error: error)
             }
@@ -41,11 +60,11 @@ class EZYHTTPClient {
                 let responseDict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! [String: AnyObject]
                 completionHandler(responseData: responseDict)
             } catch {
-                let jsonError: NSError = NSError(domain: "Invalid JSON returned", code: 1, userInfo: nil) // the code should probably be some enum
+                let jsonError: NSError = NSError(domain: "Invalid JSON returned", code: 1, userInfo: nil) // the 'code' should probably be some enum
                 errorHandler!(error: jsonError)
             }
         }
-        
+
         task.resume()
     }
     
@@ -65,6 +84,12 @@ class EZYHTTPClient {
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPMethod = "POST"
+            // There must be a better way to handle access_tokens with an http client
+        if let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token") {
+            let accessTokenHeaderString: String = "Token \(accessToken)"
+            request.setValue(accessTokenHeaderString, forHTTPHeaderField: "Authorization")
+        }
+            
             
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions())

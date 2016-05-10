@@ -12,10 +12,12 @@ import Alamofire
 
 private let reuseIdentifier = "DestinationCell"
 
-class DestinationCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class DestinationCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, FilterByTagSelectionDelegate {
     var locationManager: CLLocationManager
     var model: DestinationModel
     var selectedDestination: EZYDestination?
+    var selectedTagIds: [Int] = [Int]()
+    var tagSelectionNavVC: UINavigationController?
     
     init(destinationModel: DestinationModel, collectionViewLayout: UICollectionViewLayout) {
         locationManager = CLLocationManager()
@@ -37,12 +39,12 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.firstLoadOfObjects {
-            print("In the completion handler")
-            dispatch_async(dispatch_get_main_queue(), {
-                self.collectionView?.reloadData()
-            })
-        }
+//        model.firstLoadOfObjects {
+//            print("In the completion handler")
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.collectionView?.reloadData()
+//            })
+//        }
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -60,15 +62,38 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: - Navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showCamera" {
+            let imagePickerController = segue.destinationViewController as! UIImagePickerController
+            imagePickerController.sourceType = .Camera
+            imagePickerController.delegate = self
+            imagePickerController.allowsEditing = true
+            imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
+        }
+        
+        if segue.identifier == "DestinationIsolationView" {
+            let destinationIsoVC = segue.destinationViewController as! DestinationIsoViewController
+            destinationIsoVC.destination = selectedDestination
+        }
+        
+        if segue.identifier == "PresentTagSelection" {
+            print("Presenting the tags selection view controller")
+            if self.tagSelectionNavVC != nil {
+                self.presentViewController(self.tagSelectionNavVC!, animated: true, completion: {() in
+                    print("We are presenting the tag selection")
+                })
+            } else {
+                print("Initializing new tag selection view controller")
+                self.tagSelectionNavVC = segue.destinationViewController as! UINavigationController
+                let tagSelectionTableVC = self.tagSelectionNavVC!.topViewController as! EZYTagsTableViewController
+                tagSelectionTableVC.delegate = self
+                tagSelectionTableVC.model = EZYTagModel()
+            }
+        }
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -140,21 +165,7 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
 
         performSegueWithIdentifier("DestinationIsolationView", sender: self)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showCamera" {
-            let imagePickerController = segue.destinationViewController as! UIImagePickerController
-            imagePickerController.sourceType = .Camera
-            imagePickerController.delegate = self
-            imagePickerController.allowsEditing = true
-            imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
-        }
-        
-         if segue.identifier == "DestinationIsolationView" {
-            let destinationIsoVC = segue.destinationViewController as! DestinationIsoViewController
-            destinationIsoVC.destination = selectedDestination
-        }
-    }
+
     
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
@@ -254,6 +265,13 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
             self.locationManager.startUpdatingHeading()
         }
     }
+    
+    // MARK: FilterByTagSelectionDelegate
+    func didUpdateSelectedTags(selectedTags: [EZYDestinationTag]) {
+        print("UPDATED TAGS")
+        print(selectedTags)
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*
