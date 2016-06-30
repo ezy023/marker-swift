@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		038E45431CE167500052F299 /* EZYImageIsolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038E45421CE167500052F299 /* EZYImageIsolation.swift */; };
 		03A6D3F31C0A3D840067FA96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6D3F21C0A3D840067FA96 /* AppDelegate.swift */; };
 		03A6D3F81C0A3D840067FA96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A6D3F61C0A3D840067FA96 /* Main.storyboard */; };
 		03A6D3FA1C0A3D840067FA96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03A6D3F91C0A3D840067FA96 /* Assets.xcassets */; };
@@ -121,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		038E45421CE167500052F299 /* EZYImageIsolation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYImageIsolation.swift; sourceTree = "<group>"; };
 		03A6D3EF1C0A3D840067FA96 /* MarkerStoryboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkerStoryboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A6D3F21C0A3D840067FA96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03A6D3F71C0A3D840067FA96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */,
 				03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */,
 				03E1843D1CA8947400884CF4 /* EZYTagsTableViewController.swift */,
+				038E45421CE167500052F299 /* EZYImageIsolation.swift */,
 			);
 			path = MarkerStoryboard;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				TargetAttributes = {
 					03A6D3EE1C0A3D840067FA96 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 869755T8N8;
 					};
 					03D1E7781C8276F30017FD78 = {
 						CreatedOnToolsVersion = 7.2;
@@ -432,6 +436,7 @@
 				03D1E78B1C8910B20017FD78 /* EZYURLSessionProtocol.swift in Sources */,
 				03D1E76D1C7E7F610017FD78 /* EZYHTTPClient.swift in Sources */,
 				03B3B34D1C14C1C1000226C6 /* DestinationModel.swift in Sources */,
+				038E45431CE167500052F299 /* EZYImageIsolation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +567,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
@@ -575,6 +582,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -582,6 +590,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
@@ -595,6 +605,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

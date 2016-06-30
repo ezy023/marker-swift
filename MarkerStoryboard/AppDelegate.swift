@@ -19,11 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         GMSServices.provideAPIKey(googleMapsAPIKey)
-        NSUserDefaults.standardUserDefaults().setValue("erik-token", forKey: "access_token")
-        NSUserDefaults.standardUserDefaults().setValue(1, forKey: "user_id")
+//        NSUserDefaults.standardUserDefaults().setValue("erik-token", forKey: "access_token")
+//        NSUserDefaults.standardUserDefaults().setValue(1, forKey: "user_id")
         
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("access_token")
-        if let accessToken = NSUserDefaults.standardUserDefaults().valueForKey("access_token") {
+        if NSUserDefaults.standardUserDefaults().valueForKey("access_token") != nil {
             self.window?.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
         } else {
             self.window?.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController");

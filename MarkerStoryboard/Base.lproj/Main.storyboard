@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eaz-VU-P6v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eaz-VU-P6v">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -215,6 +215,48 @@
             </objects>
             <point key="canvasLocation" x="1255" y="1286"/>
         </scene>
+        <!--Image Isolation View Controller-->
+        <scene sceneID="U5S-do-INS">
+            <objects>
+                <viewController storyboardIdentifier="imageIsolationViewController" id="rwA-XW-Bwm" customClass="EZYImageIsolationViewController" customModule="MarkerStoryboard" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IZ8-4E-WRK"/>
+                        <viewControllerLayoutGuide type="bottom" id="dgR-9r-Lg6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="42W-cW-h1w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wSu-97-kXH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="389"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPL-lc-ZnP">
+                                <rect key="frame" x="286" y="461" width="65" height="30"/>
+                                <state key="normal" title="Add Tags"/>
+                                <connections>
+                                    <segue destination="u7h-UD-8XJ" kind="presentation" identifier="CreateWithTags" id="t8u-E2-pLE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcy-Bq-4QS">
+                                <rect key="frame" x="170" y="556" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveImageWithSelectedTags" destination="rwA-XW-Bwm" eventType="touchUpInside" id="8JS-F8-H8C"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cLL-2g-xuV"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageView" destination="wSu-97-kXH" id="VaJ-Lw-2qT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iSR-sT-rQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2212.5" y="899.5"/>
+        </scene>
         <!--Destination Iso View Controller-->
         <scene sceneID="Oos-2T-Fhj">
             <objects>
@@ -232,7 +274,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZv-qi-Nnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1874.5" y="426.5"/>
+            <point key="canvasLocation" x="2212.5" y="126.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="t8u-E2-pLE"/>
+    </inferredMetricsTieBreakers>
 </document>

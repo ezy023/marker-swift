@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
                 let accessToken = responseData["access_token"] as! String
                 let userId = responseData["id"] as! Int
                 NSUserDefaults.standardUserDefaults().setValue(accessToken, forKey: "access_token")
-                NSUserDefaults.standardUserDefaults().setValue(userId, forKey: "user-id")
+                NSUserDefaults.standardUserDefaults().setValue(userId, forKey: "user_id")
                 self.switchToMainStoryboardOnSuccess()
             }, errorHandler: { (error) in
                 NSLog(error!.localizedDescription)
@@ -54,11 +54,11 @@ class LoginViewController: UIViewController {
             "email": email,
             "password": password
         ]
-        self.networking.POST("users/login/", params: params, completionHandler: { (responseData) in
+        self.networking.POST("users/create/", params: params, completionHandler: { (responseData) in
                 let accessToken = responseData["access_token"] as! String
                 let userId = responseData["id"] as! Int
                 NSUserDefaults.standardUserDefaults().setValue(accessToken, forKey: "access_token")
-                NSUserDefaults.standardUserDefaults().setValue(userId, forKey: "user-id")
+                NSUserDefaults.standardUserDefaults().setValue(userId, forKey: "user_id")
                 self.switchToMainStoryboardOnSuccess()
             }, errorHandler: { (error) in
                 NSLog(error!.localizedDescription)
@@ -90,7 +90,7 @@ class LoginViewController: UIViewController {
     
     func debugResponse(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void {
         do {
-            if let respDict: [String: AnyObject] = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! [String: AnyObject] {
+            if let respDict: [String: AnyObject] = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? [String: AnyObject] {
                 print("Access Token \(respDict["access_token"] as! String)")
             }
         } catch {

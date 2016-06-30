@@ -25,7 +25,6 @@ protocol EZYHTTPClientProtocol {
 class EZYHTTPClient: EZYHTTPClientProtocol {
 //    let baseURL = "http://192.168.1.24:8000/"
     let baseURL = "http://127.0.0.1:8000/"
-//    let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token") // you shouldn't need an accessToken to create an HTTPClient
     let session: EZYURLSessionProtocol
     
     init(session: EZYURLSessionProtocol = NSURLSession.sharedSession()) {
@@ -38,6 +37,7 @@ class EZYHTTPClient: EZYHTTPClientProtocol {
     errorHandler: ((error: NSError?) -> Void)?) {
 
         let fullURLString = baseURL + relativeUrl
+        print("Request: \(fullURLString)")
         guard let url = NSURL(string: fullURLString) else {
             print("Improperly formatted url %s", relativeUrl)
             return;
@@ -74,6 +74,7 @@ class EZYHTTPClient: EZYHTTPClientProtocol {
         errorHandler: ((error: NSError?) -> Void)?) {
             
         let fullURLString = baseURL + relativeUrl
+        print("Request: \(fullURLString)")        
         guard let url = NSURL(string: fullURLString) else {
             NSLog("Improperly formatted url %s", relativeUrl)
             let urlError: NSError? = NSError(domain: "Invalid URL", code: 1, userInfo: nil)
@@ -84,7 +85,8 @@ class EZYHTTPClient: EZYHTTPClientProtocol {
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPMethod = "POST"
-            // There must be a better way to handle access_tokens with an http client
+        
+        // There must be a better way to handle access_tokens with an http client
         if let accessToken = NSUserDefaults.standardUserDefaults().objectForKey("access_token") {
             let accessTokenHeaderString: String = "Token \(accessToken)"
             request.setValue(accessTokenHeaderString, forHTTPHeaderField: "Authorization")

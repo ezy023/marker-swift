@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol FilterByTagSelectionDelegate {
+protocol TagSelectionDelegate {
     var selectedTagIds: [Int] { get set }
     
     func didUpdateSelectedTags(selectedTags: [EZYDestinationTag])
@@ -30,7 +30,7 @@ class EZYTagModel {
         self.tags = [EZYDestinationTag]()
     }
     
-    func tagAtIndexPath(indexPath: NSIndexPath) -> EZYDestinationTag {
+        func tagAtIndexPath(indexPath: NSIndexPath) -> EZYDestinationTag {
         return self.tags[indexPath.row]
     }
     
@@ -95,10 +95,10 @@ class EZYTagModel {
 private let reuseIdentifier = "TagTableViewCell"
 
 class EZYTagsTableViewController: UITableViewController {
-    var delegate: FilterByTagSelectionDelegate?
+    var delegate: TagSelectionDelegate?
     var model: EZYTagModel?
     
-    init(delegate: FilterByTagSelectionDelegate, tagModel: EZYTagModel) {
+    init(delegate: TagSelectionDelegate, tagModel: EZYTagModel) {
         self.delegate = delegate
         self.model = tagModel
         super.init(style: UITableViewStyle.Plain)
@@ -132,13 +132,6 @@ class EZYTagsTableViewController: UITableViewController {
                             self.tableView.reloadData()
                         })
                     })
-//                    if let userId: Int = NSUserDefaults.standardUserDefaults().valueForKey("userId") as! Int {
-//                        print("\(userId)")
-//                    }
-                    
-//                    self.model!.createNewTag(tagText, userId: userId, completionBlk: {(responseData) in
-//                        print("Response: \(responseData.data)")
-//                    })
                 }
             }
         })

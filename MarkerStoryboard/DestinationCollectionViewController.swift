@@ -12,7 +12,7 @@ import Alamofire
 
 private let reuseIdentifier = "DestinationCell"
 
-class DestinationCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, FilterByTagSelectionDelegate {
+class DestinationCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, TagSelectionDelegate {
     var locationManager: CLLocationManager
     var model: DestinationModel
     var selectedDestination: EZYDestination?
@@ -39,12 +39,14 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        model.firstLoadOfObjects {
-//            print("In the completion handler")
-//            dispatch_async(dispatch_get_main_queue(), {
-//                self.collectionView?.reloadData()
-//            })
-//        }
+        self.locationManager.requestWhenInUseAuthorization()
+        let client = EZYHTTPClient();
+        model.firstLoadOfObjects {
+            print("In the completion handler")
+            dispatch_async(dispatch_get_main_queue(), {
+                self.collectionView?.reloadData()
+            })
+        }
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -127,40 +129,6 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let testImage = UIImage(named: "marker")
-//        let imageJPEGData: NSData? = UIImageJPEGRepresentation(testImage!, 1.0)
-//        let params = ["test1": "erik", "test2": "starwars"];
-//        let paramsJSON: NSData
-//        
-//        do {
-//            paramsJSON = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(rawValue: 0))
-//        } catch let error as NSError {
-//            paramsJSON = NSData()
-//            print(error)
-//        }
-//
-//        Alamofire.upload(.POST, "http://127.0.0.1:8000/users/create/", multipartFormData: { multipart in
-//                multipart.appendBodyPart(data: imageJPEGData!, name: "testimage")
-//                multipart.appendBodyPart(data: paramsJSON, name: "imagemeta")
-//            },
-//            encodingCompletion: { encodingResult in
-//                switch encodingResult {
-//                case .Success(let _, _, _):
-//                    print("SUCCESS")
-//                    collectionView.reloadData()
-//                case .Failure(let encodingError):
-//                    print(encodingError)
-//                }
-//            })
-////        Alamofire.request(.GET, "http://127.0.0.1:8000").response {request, response, data, error in
-////            print(response)
-////            print(data)
-////            print(error)
-////        }
-//        let macIP: String = "http://192.168.1.24:8000"
-//        print("Making GET to \(macIP)")
-//        Alamofire.request(.GET, macIP)
-//=====================================================================
         selectedDestination = self.model.destinationAtIndex(indexPath)
 
         performSegueWithIdentifier("DestinationIsolationView", sender: self)
@@ -168,84 +136,29 @@ class DestinationCollectionViewController: UICollectionViewController, UIImagePi
 
     
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("Finished Picking Image")
         guard let currentLocation = locationManager.location
-        else {
-            print("There was an error retrieving the location for this image")
-            return
+            else {
+                print("There was an error retrieving the location for this image") // probably want to display an error to the user
+                return
         }
-        guard let editInfo = editingInfo else {
-            print("No Editing Info")
-            return
+        let image: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let imageIsoVC: EZYImageIsolationViewController = storyboard.instantiateViewControllerWithIdentifier("imageIsolationViewController") as! EZYImageIsolationViewController
+        imageIsoVC.image = image
+        imageIsoVC.location = currentLocation
+        imageIsoVC.uploadCompletionBlk = { (newDestination: EZYDestination) in
+            self.model.addDestination(newDestination)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.collectionView?.reloadData()
+            })
         }
-        
-        guard let editedImage: UIImage = editInfo[UIImagePickerControllerEditedImage] as? UIImage else {
-            print("No Edited Image")
-            return
-        }
-        
-        let imagePNGData: NSData? = UIImagePNGRepresentation(editedImage)
-        let imageJPEGData: NSData? = UIImageJPEGRepresentation(editedImage, 1.0)
-        let uuid = NSUUID().UUIDString
-        let fileManager = NSFileManager.defaultManager()
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let filePathToWrite = "\(paths)/\(uuid).png"
-        fileManager.createFileAtPath(filePathToWrite, contents: imagePNGData, attributes: nil)
-        
-        var params: [String: AnyObject] = ["latitude": currentLocation.coordinate.latitude, "longitude": currentLocation.coordinate.longitude]
-        
-        Alamofire.request(.GET, "http://192.168.1.24:8000/users/1/locations/aws_post/").responseJSON { (response) in
-            print(response)
-            if let jsonData = response.result.value {
-                let fields = jsonData["fields"]
-                let awsURL = jsonData["url"] as! String
-                let theFields = fields as! Dictionary<String, String>
-                
-                Alamofire.upload(
-                    .POST,
-                    awsURL,
-                    multipartFormData: { multipart in
-                        multipart.appendBodyPart(data: (theFields["x-amz-algorithm"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-algorithm")
-                        multipart.appendBodyPart(data: (theFields["key"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "key")
-                        multipart.appendBodyPart(data: (theFields["x-amz-signature"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-signature")
-                        multipart.appendBodyPart(data: (theFields["x-amz-date"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-date")
-                        multipart.appendBodyPart(data: (theFields["policy"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "policy")
-                        multipart.appendBodyPart(data: (theFields["x-amz-credential"]!.dataUsingEncoding(NSUTF8StringEncoding))!, name: "x-amz-credential")
-                        multipart.appendBodyPart(data: imageJPEGData!, name: "file", fileName: "test-ios.png", mimeType: "image/jpeg")
-                    },
-                    encodingCompletion: { encodingResult in
-                        switch encodingResult {
-                        case .Success(let upload, _, _):
-                            upload.response { request, response, data, error in
-                                if let imageLocationOnAWS = response?.allHeaderFields["Location"] as? String {
-                                    params["image_url"] = imageLocationOnAWS
-                                    Alamofire.request(.POST, "http://192.168.1.24:8000/users/1/locations/create/?access_token=7b15237d-7b45-11e5-90e7-a45e60cc4223", parameters: params, encoding: .JSON, headers: nil).response { response in
-                                        self.collectionView?.reloadData()
-                                        // At some point it would be nice to animate the new cell in?
-                                        do {
-                                            try fileManager.removeItemAtPath(filePathToWrite)
-                                            let imageAWSURL = NSURL(string: imageLocationOnAWS)
-                                            let newDestination: EZYDestination = EZYDestination(imageURL: imageAWSURL!, destinationLocation: currentLocation)
-                                            self.model.addDestination(newDestination)
-                                        } catch {
-                                            print("Error removing file at path \(filePathToWrite)")
-                                        }
-                                    }
-                                } else {
-                                    print("No Location for image returned")
-                                }
-//                                let thedata = NSString(data: data!, encoding: NSUTF8StringEncoding) // Helpful to print AWS Response
-                            }
-                        case .Failure(let encodingError):
-                            debugPrint(encodingError)
-                        }
-                    }
-                )
-            }
-        }
-        
-        self.dismissViewControllerAnimated(true, completion: nil) // In this completion block reload collectionView data to refresh with new image
+        self.dismissViewControllerAnimated(true, completion: {
+            print("Need to dismiss the camera derp!!")
+        })
+        self.navigationController?.presentViewController(imageIsoVC, animated: true, completion: nil)
+        print("PUSHING VC")
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
