@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0373E8211D25D2A800C3FC78 /* MarkerStoryboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373E8201D25D2A800C3FC78 /* MarkerStoryboardTests.swift */; };
+		0373E82A1D2AB15200C3FC78 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373E8291D2AB15200C3FC78 /* main.swift */; };
 		038E45431CE167500052F299 /* EZYImageIsolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038E45421CE167500052F299 /* EZYImageIsolation.swift */; };
 		03A6D3F31C0A3D840067FA96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6D3F21C0A3D840067FA96 /* AppDelegate.swift */; };
 		03A6D3F81C0A3D840067FA96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A6D3F61C0A3D840067FA96 /* Main.storyboard */; };
@@ -42,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0373E8231D25D2A800C3FC78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03A6D3E71C0A3D840067FA96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03A6D3EE1C0A3D840067FA96;
+			remoteInfo = MarkerStoryboard;
+		};
 		03B3B3591C42F2B4000226C6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 03B3B34F1C42F2B3000226C6 /* Alamofire.xcodeproj */;
@@ -98,13 +107,6 @@
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = "Alamofire iOS";
 		};
-		03D1E77E1C8276F30017FD78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 03A6D3E71C0A3D840067FA96 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 03A6D3EE1C0A3D840067FA96;
-			remoteInfo = MarkerStoryboard;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +124,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0373E81E1D25D2A700C3FC78 /* MarkerStoryboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkerStoryboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0373E8201D25D2A800C3FC78 /* MarkerStoryboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStoryboardTests.swift; sourceTree = "<group>"; };
+		0373E8221D25D2A800C3FC78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0373E8291D2AB15200C3FC78 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		038E45421CE167500052F299 /* EZYImageIsolation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYImageIsolation.swift; sourceTree = "<group>"; };
 		03A6D3EF1C0A3D840067FA96 /* MarkerStoryboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkerStoryboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A6D3F21C0A3D840067FA96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,12 +159,18 @@
 		03B3B34F1C42F2B3000226C6 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		03D1E7641C7A539F0017FD78 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		03D1E76C1C7E7F610017FD78 /* EZYHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYHTTPClient.swift; sourceTree = "<group>"; };
-		03D1E7791C8276F30017FD78 /* MarkerStoryboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkerStoryboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D1E78A1C8910B20017FD78 /* EZYURLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYURLSessionProtocol.swift; sourceTree = "<group>"; };
 		03E1843D1CA8947400884CF4 /* EZYTagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZYTagsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0373E81B1D25D2A700C3FC78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03A6D3EC1C0A3D840067FA96 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,19 +194,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03D1E7761C8276F30017FD78 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0373E81F1D25D2A700C3FC78 /* MarkerStoryboardTests */ = {
+			isa = PBXGroup;
+			children = (
+				0373E8201D25D2A800C3FC78 /* MarkerStoryboardTests.swift */,
+				0373E8221D25D2A800C3FC78 /* Info.plist */,
+			);
+			path = MarkerStoryboardTests;
+			sourceTree = "<group>";
+		};
 		03A6D3E61C0A3D840067FA96 = {
 			isa = PBXGroup;
 			children = (
+				0373E8291D2AB15200C3FC78 /* main.swift */,
 				03A6D4321C0ABE060067FA96 /* Accelerate.framework */,
 				03A6D4301C0ABDFF0067FA96 /* CoreBluetooth.framework */,
 				03A6D42E1C0ABCBF0067FA96 /* SystemConfiguration.framework */,
@@ -210,6 +225,7 @@
 				03A6D41A1C0ABC4D0067FA96 /* CoreData.framework */,
 				03A6D4181C0ABC440067FA96 /* AVFoundation.framework */,
 				03A6D3F11C0A3D840067FA96 /* MarkerStoryboard */,
+				0373E81F1D25D2A700C3FC78 /* MarkerStoryboardTests */,
 				03A6D3F01C0A3D840067FA96 /* Products */,
 				03B3B34F1C42F2B3000226C6 /* Alamofire.xcodeproj */,
 			);
@@ -219,7 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				03A6D3EF1C0A3D840067FA96 /* MarkerStoryboard.app */,
-				03D1E7791C8276F30017FD78 /* MarkerStoryboardTests.xctest */,
+				0373E81E1D25D2A700C3FC78 /* MarkerStoryboardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,6 +281,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0373E81D1D25D2A700C3FC78 /* MarkerStoryboardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0373E8251D25D2A800C3FC78 /* Build configuration list for PBXNativeTarget "MarkerStoryboardTests" */;
+			buildPhases = (
+				0373E81A1D25D2A700C3FC78 /* Sources */,
+				0373E81B1D25D2A700C3FC78 /* Frameworks */,
+				0373E81C1D25D2A700C3FC78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0373E8241D25D2A800C3FC78 /* PBXTargetDependency */,
+			);
+			name = MarkerStoryboardTests;
+			productName = MarkerStoryboardTests;
+			productReference = 0373E81E1D25D2A700C3FC78 /* MarkerStoryboardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		03A6D3EE1C0A3D840067FA96 /* MarkerStoryboard */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03A6D4011C0A3D840067FA96 /* Build configuration list for PBXNativeTarget "MarkerStoryboard" */;
@@ -284,42 +318,24 @@
 			productReference = 03A6D3EF1C0A3D840067FA96 /* MarkerStoryboard.app */;
 			productType = "com.apple.product-type.application";
 		};
-		03D1E7781C8276F30017FD78 /* MarkerStoryboardTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 03D1E7801C8276F30017FD78 /* Build configuration list for PBXNativeTarget "MarkerStoryboardTests" */;
-			buildPhases = (
-				03D1E7751C8276F30017FD78 /* Sources */,
-				03D1E7761C8276F30017FD78 /* Frameworks */,
-				03D1E7771C8276F30017FD78 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				03D1E77F1C8276F30017FD78 /* PBXTargetDependency */,
-			);
-			name = MarkerStoryboardTests;
-			productName = MarkerStoryboardTests;
-			productReference = 03D1E7791C8276F30017FD78 /* MarkerStoryboardTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		03A6D3E71C0A3D840067FA96 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Erik Allar";
 				TargetAttributes = {
+					0373E81D1D25D2A700C3FC78 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 869755T8N8;
+						TestTargetID = 03A6D3EE1C0A3D840067FA96;
+					};
 					03A6D3EE1C0A3D840067FA96 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 869755T8N8;
-					};
-					03D1E7781C8276F30017FD78 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 869755T8N8;
-						TestTargetID = 03A6D3EE1C0A3D840067FA96;
 					};
 				};
 			};
@@ -343,7 +359,7 @@
 			projectRoot = "";
 			targets = (
 				03A6D3EE1C0A3D840067FA96 /* MarkerStoryboard */,
-				03D1E7781C8276F30017FD78 /* MarkerStoryboardTests */,
+				0373E81D1D25D2A700C3FC78 /* MarkerStoryboardTests */,
 			);
 		};
 /* End PBXProject section */
@@ -401,6 +417,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0373E81C1D25D2A700C3FC78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03A6D3ED1C0A3D840067FA96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -413,16 +436,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03D1E7771C8276F30017FD78 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0373E81A1D25D2A700C3FC78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0373E8211D25D2A800C3FC78 /* MarkerStoryboardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03A6D3EB1C0A3D840067FA96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -434,31 +458,25 @@
 				03A6D4051C0A424E0067FA96 /* DestinationCollectionViewCell.swift in Sources */,
 				03A6D3F31C0A3D840067FA96 /* AppDelegate.swift in Sources */,
 				03D1E78B1C8910B20017FD78 /* EZYURLSessionProtocol.swift in Sources */,
+				0373E82A1D2AB15200C3FC78 /* main.swift in Sources */,
 				03D1E76D1C7E7F610017FD78 /* EZYHTTPClient.swift in Sources */,
 				03B3B34D1C14C1C1000226C6 /* DestinationModel.swift in Sources */,
 				038E45431CE167500052F299 /* EZYImageIsolation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03D1E7751C8276F30017FD78 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0373E8241D25D2A800C3FC78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03A6D3EE1C0A3D840067FA96 /* MarkerStoryboard */;
+			targetProxy = 0373E8231D25D2A800C3FC78 /* PBXContainerItemProxy */;
+		};
 		03B3B36A1C42F323000226C6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
 			targetProxy = 03B3B3691C42F323000226C6 /* PBXContainerItemProxy */;
-		};
-		03D1E77F1C8276F30017FD78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 03A6D3EE1C0A3D840067FA96 /* MarkerStoryboard */;
-			targetProxy = 03D1E77E1C8276F30017FD78 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -482,6 +500,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0373E8261D25D2A800C3FC78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = MarkerStoryboardTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarkerStoryboard.app/MarkerStoryboard";
+			};
+			name = Debug;
+		};
+		0373E8271D25D2A800C3FC78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = MarkerStoryboardTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarkerStoryboard.app/MarkerStoryboard";
+			};
+			name = Release;
+		};
 		03A6D3FF1C0A3D840067FA96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -609,38 +655,17 @@
 			};
 			name = Release;
 		};
-		03D1E7811C8276F30017FD78 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = MarkerStoryboardTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarkerStoryboard.app/MarkerStoryboard";
-			};
-			name = Debug;
-		};
-		03D1E7821C8276F30017FD78 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = MarkerStoryboardTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.allareri.MarkerStoryboardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarkerStoryboard.app/MarkerStoryboard";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0373E8251D25D2A800C3FC78 /* Build configuration list for PBXNativeTarget "MarkerStoryboardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0373E8261D25D2A800C3FC78 /* Debug */,
+				0373E8271D25D2A800C3FC78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		03A6D3EA1C0A3D840067FA96 /* Build configuration list for PBXProject "MarkerStoryboard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -655,15 +680,6 @@
 			buildConfigurations = (
 				03A6D4021C0A3D840067FA96 /* Debug */,
 				03A6D4031C0A3D840067FA96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		03D1E7801C8276F30017FD78 /* Build configuration list for PBXNativeTarget "MarkerStoryboardTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				03D1E7811C8276F30017FD78 /* Debug */,
-				03D1E7821C8276F30017FD78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
